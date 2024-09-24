@@ -59,7 +59,7 @@ def format_docs(docs):
 # Prompt pour générer des mots-clés et choisir la langue
 keyword_prompt = ChatPromptTemplate.from_template(
     """
-    Based on the following question, generate a list of 1-5 relevant keywords or phrases for searching on Wikipedia.
+    Based on the following question, generate a list of 1-3 relevant keywords or phrases for searching on Wikipedia.
     Also, choose the most appropriate language for this search. Consider factors like:
     - The subject matter (e.g., French might be best for topics specific to France)
     - The potential for more comprehensive information (e.g., English often has more extensive articles)
@@ -67,6 +67,8 @@ keyword_prompt = ChatPromptTemplate.from_template(
     - Except for English, don't choose a language that is not precisely related to the question.
     - Question will always be in French, so don't be biased by the language of the question.
     - They should be different enough from previous keywords to expand the search.
+    - It is okay to put only one keyword if it is very relevant. Be precise rather than broad.
+    - Remember that it's for wikipedia webpages, so choose keywords that could be webpages with high probability to have the information.
 
     Question: {question}
     Previously used languages: {previous_languages}
@@ -111,6 +113,7 @@ analysis_prompt = ChatPromptTemplate.from_template(
 final_answer_prompt = ChatPromptTemplate.from_template(
     """
     Based on all the information gathered, provide a comprehensive answer to the question in French. Follow these guidelines:
+    If the question if fact-based, and you have enough information to answer it, provide a well-reasoned answer and say 'Nous avons suffisamment d'informations'.
 
     1. Summarize the key points from all retrieved information.
     2. Provide a well-reasoned, cautious answer that avoids overconfidence.
@@ -195,7 +198,7 @@ def iterative_search(question):
         
         # Récupérer les informations
         all_docs = []
-        retriever = WikipediaRetriever(top_k_results=3, lang=language, doc_content_chars_max=8000)
+        retriever = WikipediaRetriever(top_k_results=2, lang=language, doc_content_chars_max=100000)
         for keyword in keywords:
             docs = retriever.get_relevant_documents(keyword)
             all_docs.extend(docs)
@@ -231,7 +234,7 @@ def iterative_search(question):
                 </div>
             """, unsafe_allow_html=True)
 
-        if "Sufficient information" in analysis:
+        if "Nous avons suffisamment d'informations" in analysis:
             break
 
         iteration += 1
