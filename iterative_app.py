@@ -45,7 +45,7 @@ st.markdown("""
     """, unsafe_allow_html=True)
 
 # Initialisation de ChatOpenAI
-llm = ChatOpenAI(model="gpt-4o-mini", api_key=OPENAI_API_KEY)
+llm = ChatOpenAI(model="gpt-4o", api_key=OPENAI_API_KEY)
 
 # Fonction pour formater les documents
 def format_docs(docs):
