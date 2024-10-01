@@ -4,3 +4,8 @@ langchain-openai
 wikipedia
 streamlit
 langchain-community
+google-api-python-client
+faiss-cpu
+html2text
+newspaper3k
+lxml_html_clean
