@@ -104,23 +104,15 @@ st.markdown(
     .stProgress > div > div > div > div {
         background-color: #4CAF50;
     }
-    .highlight {
-        background-color: #358205;  
-        padding: 10px;
-        margin-bottom: 10px;
-        border-radius: 5px;
-    }
     .card {
         border: 1px solid #ddd;
         padding: 15px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         border-radius: 8px;
         margin-bottom: 20px;
-        background-color: #fff;
     }
     .card h3 {
         font-size: 1.8em;
-        color: #333;
     }
     .card-content {
         font-size: 1.1em;
@@ -128,7 +120,6 @@ st.markdown(
     }
     .card p {
         margin: 10px 0;
-        color: #333;
     }
     .card:hover {
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
@@ -160,7 +151,6 @@ st.markdown(
     .info-quote {
         font-size: 0.9em;
         font-style: italic;
-        color: #555;
     }
 
     mark {
@@ -322,7 +312,6 @@ def process_question(question, max_iterations=3):
 
                 st.markdown("#### Analyse des résultats:")
                 for analysis in choice_data.analysis:
-                    print(analysis)
                     st.markdown(f"**{analysis.title}:** {analysis.content}")
 
                 st.markdown(
