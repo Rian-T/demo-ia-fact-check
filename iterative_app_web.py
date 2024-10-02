@@ -141,7 +141,6 @@ st.markdown(
       .info-summary {
         font-size: 1.1em;
         font-weight: 500;
-        color: #333;
     }
     .info-source {
         font-size: 0.9em;
